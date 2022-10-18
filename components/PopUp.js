@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
         height: '100%',
         width: '100%' ,
         paddingTop: 10,
-        marginTop: 10,
+        marginTop: -15,
         backgroundColor: '#444444',
         borderRadius: 10,
         alignItems: 'center',
@@ -85,7 +85,7 @@ const styles = StyleSheet.create({
         borderWidth: 2,
         textAlign: 'center',
         backgroundColor: '#97ce4c',
-        marginTop: 30,
+        marginTop: 10,
         borderRadius: 20,
         paddingHorizontal: 10,
 

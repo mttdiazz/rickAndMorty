@@ -215,7 +215,7 @@ const [modalData, setModalData] = useState()
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 30,
+    marginTop: 10,
   },
   searchBar:{
   },

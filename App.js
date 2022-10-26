@@ -6,6 +6,7 @@ import {
 import Button from './components/Boton';
 import Dropdown from './components/Dropdown';
 import { PopUp } from './components/PopUp';
+import styles from './components/styles/styles.js';
 
 
 const App = () => {
@@ -211,88 +212,5 @@ const [modalData, setModalData] = useState()
   );
 }
 
-
-
-const styles = StyleSheet.create({
-  container: {
-    marginTop: 10,
-  },
-  searchBar:{
-  },
-  itemRow: {
-    height: 380 ,
-    width:'80%',
-    marginBottom: 10,
-    borderWidth: 10,
-    borderColor: '#97ce4c',
-    borderTopLeftRadius: 20,
-    borderTopRightRadius: 20,
-    borderBottomLeftRadius: 20,
-    borderBottomRightRadius: 20,
-    marginLeft: 47,
-  },
-  itemImage: {
-    width: '100%',
-    height: 320,
-    resizeMode: 'cover',
-    borderTopLeftRadius: 10,
-    borderTopRightRadius: 10,
-    borderWidth: 10,
-    borderBottomColor: 'white',
-  },
-  itemText:{
-    flex: 1,
-    fontSize: 25,
-    padding: 1,
-    color: 'white',
-    textAlign: 'center',
-  },
-  loader:{
-    marginTop: 10,
-    alignItems: 'center',
-  },
-  header:{ //Estilo del view que tiene boton de filtro
-    marginTop: 50,
-    marginBottom:-25,
-    alignItems: 'center',
-
-  },
-  TextInputStyle:{
-    height: 40,
-    borderWidth: 3,
-    borderColor:'black',
-    align:'center',
-    textAlign:'center',
-  },
-  top:{ //Estilo de todo el parent (boton de filtro, y modal)
-    backgroundColor: 'black',
-  },
-  title:{
-    color:'#97ce4c',
-    fontSize: 30,
-  },
-  subtitle:{
-    color:'#97ce4c',
-    marginTop:10,
-    marginBottom:10,
-    fontsize: 20,
-  },
-  filtro:{
-    backgroundColor: 'black',
-    
-  },
-  form:{
-    positiono: 'center',
-    backgroundColor:'#97ce4c',
-    flexDirection:'column',
-    align:'stretch',
-    textAlign:'center',
-  },
-  filterButtons:{
-    flexDirection:'row',
-    marginTop:15,
-    marginLeft:15,
-  },
-})
 
 export default App;

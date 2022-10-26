@@ -1,6 +1,6 @@
 import {useState} from 'react';
 import { SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-
+import styles from './styles/styles.js';
 
 const Dropdown =({
     value={},
@@ -46,15 +46,6 @@ const Dropdown =({
     );
   };
 
-  const styles = StyleSheet.create({
-    dropdownStyle:{
-        backgroundColor: '#e4a788',
-        padding: 8,
-        borderRadius: 5,
-        minHeight: 42,
-        justifyContent: 'center',
-        marginBottom: 6,
-    },
-});
+  
 
   export default Dropdown;

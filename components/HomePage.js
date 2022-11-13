@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import { 
   StyleSheet, View, Text,
-   FlatList, Image, ActivityIndicator, TextInput, TouchableOpacity, Modal, SafeAreaView, ImageBackground
+   FlatList, Image, ActivityIndicator, TextInput, TouchableOpacity, Modal, ImageBackground
 } from 'react-native';
 import Button from './Boton';
 import Dropdown from './Dropdown';
@@ -69,7 +69,7 @@ const [modalData, setModalData] = useState()
   renderItem = ({item}) => {
     if(item){ //Si matcheo resultados
     return(
-      <SafeAreaView style ={styles.itemRow}>
+      <View style ={styles.itemRow}>
         <TouchableOpacity style={styles.touchableOpacity} onPress={() => changeModalVisibility(true,item)}>
           <Image source={{uri:item.image }} style={styles.itemImage}/>
           </TouchableOpacity>
@@ -79,7 +79,7 @@ const [modalData, setModalData] = useState()
               changeModalVisibility={changeModalVisibility}
             ></PopUp>
           </Modal>        
-      </SafeAreaView>
+      </View>
     )
     }
   }
@@ -203,7 +203,7 @@ const [modalData, setModalData] = useState()
         data={characters}
         renderItem={renderItem}
         ListFooterComponent={renderFooter}
-          keyExtractor={(item, index) => index.toString()}
+        keyExtractor={(item, index) => index.toString()}
         onEndReached={loadMore}
         onEndReachedThreshold={0}
       />

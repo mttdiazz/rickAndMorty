@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
     },
     itemRow: {
       height: 380 ,
-      width:'80%',
+      width: 325,
       marginBottom: 10,
       borderWidth: 10,
       borderColor: '#97ce4c',
@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
       marginLeft: 47,
     },
     itemImage: {
-      width: '100%',
+      width: 306,
       height: 320,
       resizeMode: 'cover',
       borderTopLeftRadius: 10,
@@ -98,7 +98,7 @@ const styles = StyleSheet.create({
 
     },
     modal: {
-        height: '100%',
+        height: '110%',
         width: '100%' ,
         paddingTop: 10,
         marginTop: -15,
@@ -144,7 +144,7 @@ const styles = StyleSheet.create({
 
     },
     avatar:{
-        width: '80%',
+        width: 320,
         height: 320,
         resizeMode: 'cover',
         borderRadius: 20,

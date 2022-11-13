@@ -9,7 +9,7 @@ import { PopUp } from './PopUp';
 import styles from './styles/styles.js';
 
 
-const HomePage = () => {
+const Home = () => {
 
   const [characters, setCharacters] = useState([])
   //const [masterData, setMasterData] = useState([])
@@ -55,7 +55,7 @@ const [modalData, setModalData] = useState()
     }
   }, [currentPage])
 
-  getData = async (URL) => {
+  getData = (URL) => {
     fetch(URL)
       .then((res) => res.json())
       .then((resJson) => {
@@ -94,7 +94,7 @@ const [modalData, setModalData] = useState()
   }
 
   loadMore = () => {
-    if(currentPage<totalPage){
+    if(currentPage < totalPage){
     setCurrentPage(currentPage + 1)
     setisLoading(true)
     console.log(currentPage)
@@ -205,7 +205,7 @@ const [modalData, setModalData] = useState()
         ListFooterComponent={renderFooter}
         keyExtractor={(item, index) => index.toString()}
         onEndReached={loadMore}
-        onEndReachedThreshold={0}
+        onEndReachedThreshold={0.2}
       />
       </View>
     </View>
@@ -213,4 +213,4 @@ const [modalData, setModalData] = useState()
 }
 
 
-export default HomePage;
+export default Home;

@@ -6,7 +6,7 @@ import {
 import Button from './Boton';
 import Dropdown from './Dropdown';
 import { PopUp } from './PopUp';
-import styles from './styles.js';
+import styles from './styles/styles.js';
 
 
 const HomePage = () => {
@@ -197,7 +197,7 @@ const [modalData, setModalData] = useState()
         </Modal>
       </View>
       <View style={styles.container}>
-      <Image source={require('./src/portal.png')} style={StyleSheet.absoluteFill}></Image>    
+      <Image source={require('../src/portal.png')} style={StyleSheet.absoluteFill}></Image>    
       <FlatList
         style={styles.container}
         data={characters}

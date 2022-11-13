@@ -1,16 +1,17 @@
 import React,{useState, useEffect, useRef} from 'react';
-import { View, ActivityIndicator, Image, Text, SafeAreaView, ImageBackground } from 'react-native';
+import { View, ActivityIndicator, Image, Text , StyleSheet} from 'react-native';
 import styles from './styles/styles.js';
 import Button from './Boton';
 
 
 const Favorites = () => {
     return (
-        <SafeAreaView>
-            <Button>
-                <Text>Go to Favorites</Text>
-            </Button>
-        </SafeAreaView>
+        <View style={styles.top}>
+            <View style={styles.header}>
+                <Image source={require('../src/portal.png')} style={StyleSheet.absoluteFill}></Image>
+                    <Text style={styles.title}>Your saved characters</Text>
+            </View>
+        </View>
     )
 }
 

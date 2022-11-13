@@ -18,23 +18,23 @@ export default function App(){
                 screenOptions = {({ route }) => ({
                     tabBarActiveTintColor: 'white',
                     tabBarInactiveTintColor: 'white',
-                    tabBarActiveBackgroundColor: 'black',
-                    tabBarInactiveBackgroundColor: '#7fff00',
+                    tabBarActiveBackgroundColor: 'grey',
+                    tabBarInactiveBackgroundColor: 'black',
                     tabBarIcon: () => {
-                        if (route.name === 'home') {
+                        if (route.name === 'Home Page') {
                             return( 
-                                <Image style = {{ width: 50, height: 50  }} source = {require('./assets/portal.png')} />
+                                <Image style = {{ width: 30, height: 30  }} source = {require('./assets/home.png')} />
                      )}
-                        else if (route.name === 'favorites') {
+                        else if (route.name === 'Saved Characters') {
                             return (
-                            <Image style = {{ width: 50, height: 50  }} source = {require('./assets/likeportal.png')} />
+                            <Image style = {{ width: 30, height: 30  }} source = {require('./assets/saved.png')} />
                     )}
                     },
                                   
                 })} 
             >
-                <Tab.Screen name = 'home' component = {HomePage} options = {{ headerShown: false }} />
-                <Tab.Screen  name = 'favorites' component = {Favorites} options = {{ headerShown: false }} />
+                <Tab.Screen name = 'Home Page' component = {HomePage} options = {{ headerShown: false }} />
+                <Tab.Screen  name = 'Saved Characters' component = {Favorites} options = {{ headerShown: false }} />
             </Tab.Navigator>
         </NavigationContainer>
     );

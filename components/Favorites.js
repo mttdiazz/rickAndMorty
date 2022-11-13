@@ -1,7 +1,6 @@
 import React,{useState, useEffect, useRef} from 'react';
 import { View, ActivityIndicator, Image, Text , StyleSheet} from 'react-native';
 import styles from './styles/styles.js';
-import Button from './Boton';
 
 
 const Favorites = () => {

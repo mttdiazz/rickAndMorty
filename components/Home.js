@@ -1,18 +1,20 @@
 import React, {useEffect, useState} from 'react';
 import { 
   StyleSheet, View, Text,
-   FlatList, Image, ActivityIndicator, TextInput, TouchableOpacity, Modal, ImageBackground
+   FlatList, Image, ActivityIndicator, TextInput, TouchableOpacity, Modal
 } from 'react-native';
 import Button from './Boton';
 import Dropdown from './Dropdown';
 import { PopUp } from './PopUp';
 import styles from './styles/styles.js';
 
+import imagesOn from '../assets/fullfav.png'
+import imagesOff from '../assets/emptyfav.png'
+
 
 const Home = () => {
 
   const [characters, setCharacters] = useState([])
-  //const [masterData, setMasterData] = useState([])
   const [isLoading, setisLoading] = useState (false)
   const [currentPage, setCurrentPage] = useState(1)
   const [totalPage, setTotalPage] = useState(0)
@@ -23,6 +25,7 @@ const Home = () => {
   const [selectedStatus, setSelectedStatus] = useState({id:0, name:""});
   const [selectedGender, setSelectedGender] = useState({id:0, name:""});
   const [searchPageVisible, setSearchPageVisible]= useState(false);
+  
   const status=[ //Different Status for the characters
     {id:0, name:""},
     {id:1, name:"Alive"},
@@ -41,6 +44,7 @@ const Home = () => {
 var apiURL='https://rickandmortyapi.com/api/character/?page='+currentPage;
 const [isModalVisible, setisModalVisible] = useState(false) //modal popup para mas informacion
 const [modalData, setModalData] = useState()
+
 
   const changeModalVisibility = (bool,data) => {
     setisModalVisible(bool);
@@ -66,6 +70,12 @@ const [modalData, setModalData] = useState()
       })
   }
 
+          //fav icon
+          const [flag, setFlag] =useState(false);
+          const changeSavedStatus = () => setFlag(previousState => !previousState);
+          const imagePath= flag ? imagesOn : imagesOff
+
+
   renderItem = ({item}) => {
     if(item){ //Si matcheo resultados
     return(
@@ -73,7 +83,16 @@ const [modalData, setModalData] = useState()
         <TouchableOpacity style={styles.touchableOpacity} onPress={() => changeModalVisibility(true,item)}>
           <Image source={{uri:item.image }} style={styles.itemImage}/>
           </TouchableOpacity>
-          <Text style={styles.itemText}>{item.name}</Text>
+
+
+          <Text style={styles.itemText}>{item.name}
+           <TouchableOpacity onPress={() => changeSavedStatus()}>
+              <Image style= {styles.favIcon} source={imagePath} />
+            </TouchableOpacity>
+          </Text>
+
+      
+
           <Modal transparent = {true} animationType='fade' visible={isModalVisible} nRequestClose={()=> changeModalVisibility(false)}> 
             <PopUp modalData={modalData}
               changeModalVisibility={changeModalVisibility}
@@ -197,16 +216,16 @@ const [modalData, setModalData] = useState()
         </Modal>
       </View>
       <View style={styles.container}>
-      <Image source={require('../src/portal.png')} style={StyleSheet.absoluteFill}></Image>    
-      <FlatList
-        style={styles.container}
-        data={characters}
-        renderItem={renderItem}
-        ListFooterComponent={renderFooter}
-        keyExtractor={(item, index) => index.toString()}
-        onEndReached={loadMore}
-        onEndReachedThreshold={0.2}
-      />
+        <Image source={require('../src/portal.png')} style={StyleSheet.absoluteFill}></Image>    
+        <FlatList
+          style={styles.container}
+          data={characters}
+          renderItem={renderItem}
+          ListFooterComponent={renderFooter}
+          keyExtractor={(item, index) => index.toString()}
+          onEndReached={loadMore}
+          onEndReachedThreshold={0.2}
+        />
       </View>
     </View>
   );

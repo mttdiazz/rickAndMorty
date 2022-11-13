@@ -31,11 +31,15 @@ const styles = StyleSheet.create({
       borderBottomColor: 'white',
     },
     itemText:{
-      flex: 1,
       fontSize: 25,
       padding: 1,
       color: 'white',
       textAlign: 'center',
+    },
+    favIcon:{
+      width: 30,
+      height: 30,
+      marginLeft: 100,
     },
     loader:{
       marginTop: 10,

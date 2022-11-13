@@ -9,7 +9,7 @@ import { PopUp } from './PopUp';
 import styles from './styles.js';
 
 
-const App = () => {
+const HomePage = () => {
 
   const [characters, setCharacters] = useState([])
   //const [masterData, setMasterData] = useState([])
@@ -213,4 +213,4 @@ const [modalData, setModalData] = useState()
 }
 
 
-export default App;
+export default HomePage;

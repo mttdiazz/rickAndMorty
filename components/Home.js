@@ -7,6 +7,7 @@ import Button from './Boton';
 import Dropdown from './Dropdown';
 import { PopUp } from './PopUp';
 import styles from './styles/styles.js';
+import CharList from './CharlList';
 
 
 
@@ -68,42 +69,14 @@ const [modalData, setModalData] = useState()
         setisLoading(false);
       })
   }
-  //fav icon
-  const [flag, setFlag] =useState(false);
-  const SaveItem = (rowItem) => {
-    setFlag(true);
-    console.log('Se ha guardado a: ' + rowItem.name);
-    };
-
   
-  renderItem = ({item}) => {
-    
+
+  const renderItem = ({item}) => {
+
     if(item){ //Si matcheo resultados
+    
     return(
-      <View style ={styles.itemRow}>
-        <TouchableOpacity style={styles.touchableOpacity} onPress={() => changeModalVisibility()}>
-          <Image source={{uri:item.image }} style={styles.itemImage}/>
-          </TouchableOpacity>
-
-          <Text style={styles.itemText}>{item.name}
-            {!flag && (<TouchableOpacity onPress={() => SaveItem(item)}>
-            <Image style= {styles.favIcon} source={require('../assets/emptyfav.png')}/>
-            </TouchableOpacity>
-            )}
-            {flag && (<TouchableOpacity>
-            <Image style= {styles.favIcon} source={require('../assets/fullfav.png')}/>
-            </TouchableOpacity>
-            )}
-          </Text>
-
-      
-
-          <Modal transparent = {true} animationType='fade' visible={isModalVisible} nRequestClose={()=> changeModalVisibility(false)}> 
-            <PopUp modalData={modalData}
-              changeModalVisibility={changeModalVisibility}
-            ></PopUp>
-          </Modal>        
-      </View>
+      <CharList item={item} changeModalVisibility={changeModalVisibility} modalData={modalData} isModalVisible={isModalVisible}></CharList>
     )
     }
   }

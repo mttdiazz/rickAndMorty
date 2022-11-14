@@ -31,20 +31,19 @@ const styles = StyleSheet.create({
       borderBottomColor: 'white',
     },
     itemText:{
-      fontSize: 25,
-      padding: 1,
+      fontSize: 20,
       color: 'white',
-      textAlign: 'center',
+      paddingTop: 4,
+      marginLeft: 5,
+      textAlign: 'left',
+      flexDirection: 'row',
     },
     favIcon:{
       width: 30,
       height: 30,
-      marginLeft: 100,
-    },
-    favIconOff:{
-      width: 30,
-      height: 30,
-      marginLeft: 100,
+      position: 'absolute',
+      left: 270,
+      top: -25,
     },
     loader:{
       marginTop: 10,

@@ -23,8 +23,8 @@ const CharList = ({item,changeModalVisibility,modalData,isModalVisible}) => {
           <TouchableOpacity style={styles.touchableOpacity} onPress={() => changeModalVisibility(true,item)}>
             <Image source={{uri:item.image }} style={styles.itemImage}/>
             </TouchableOpacity>
-  
-            <Text style={styles.itemText}>{item.name}
+          
+            <Text style={styles.itemText}>{item.name} </Text>
               {!flag && (<TouchableOpacity onPress={() => SaveItem(item)}>
               <Image style= {styles.favIcon} source={require('../assets/emptyfav.png')}/>
               </TouchableOpacity>
@@ -33,7 +33,7 @@ const CharList = ({item,changeModalVisibility,modalData,isModalVisible}) => {
               <Image style= {styles.favIcon} source={require('../assets/fullfav.png')}/>
               </TouchableOpacity>
               )}
-            </Text>
+      
   
         
   

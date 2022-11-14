@@ -8,8 +8,7 @@ import Dropdown from './Dropdown';
 import { PopUp } from './PopUp';
 import styles from './styles/styles.js';
 
-import imagesOn from '../assets/fullfav.png'
-import imagesOff from '../assets/emptyfav.png'
+
 
 
 const Home = () => {
@@ -69,26 +68,32 @@ const [modalData, setModalData] = useState()
         setisLoading(false);
       })
   }
+  //fav icon
+  const [flag, setFlag] =useState(false);
+  const SaveItem = (rowItem) => {
+    setFlag(true);
+    console.log('Se ha guardado a: ' + rowItem.name);
+    };
 
-          //fav icon
-          const [flag, setFlag] =useState(false);
-          const changeSavedStatus = () => setFlag(previousState => !previousState);
-          const imagePath= flag ? imagesOn : imagesOff
-
-
+  
   renderItem = ({item}) => {
+    
     if(item){ //Si matcheo resultados
     return(
       <View style ={styles.itemRow}>
-        <TouchableOpacity style={styles.touchableOpacity} onPress={() => changeModalVisibility(true,item)}>
+        <TouchableOpacity style={styles.touchableOpacity} onPress={() => changeModalVisibility()}>
           <Image source={{uri:item.image }} style={styles.itemImage}/>
           </TouchableOpacity>
 
-
           <Text style={styles.itemText}>{item.name}
-           <TouchableOpacity onPress={() => changeSavedStatus()}>
-              <Image style= {styles.favIcon} source={imagePath} />
+            {!flag && (<TouchableOpacity onPress={() => SaveItem(item)}>
+            <Image style= {styles.favIcon} source={require('../assets/emptyfav.png')}/>
             </TouchableOpacity>
+            )}
+            {flag && (<TouchableOpacity>
+            <Image style= {styles.favIcon} source={require('../assets/fullfav.png')}/>
+            </TouchableOpacity>
+            )}
           </Text>
 
       
@@ -230,6 +235,4 @@ const [modalData, setModalData] = useState()
     </View>
   );
 }
-
-
 export default Home;

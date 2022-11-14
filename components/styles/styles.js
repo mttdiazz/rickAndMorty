@@ -41,6 +41,11 @@ const styles = StyleSheet.create({
       height: 30,
       marginLeft: 100,
     },
+    favIconOff:{
+      width: 30,
+      height: 30,
+      marginLeft: 100,
+    },
     loader:{
       marginTop: 10,
       alignItems: 'center',

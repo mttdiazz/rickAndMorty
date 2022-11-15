@@ -20,6 +20,7 @@ const styles = StyleSheet.create({
       borderBottomLeftRadius: 20,
       borderBottomRightRadius: 20,
       marginLeft: 47,
+      
     },
     itemImage: {
       width: 306,

@@ -1,15 +1,12 @@
 import React, {useEffect, useState} from 'react';
 import { 
   StyleSheet, View, Text,
-   FlatList, Image, ActivityIndicator, TextInput, TouchableOpacity, Modal
+   FlatList, Image, ActivityIndicator, TextInput, TouchableOpacity, Modal,Animated
 } from 'react-native';
 import Button from './Boton';
 import Dropdown from './Dropdown';
-import { PopUp } from './PopUp';
 import styles from './styles/styles.js';
 import CharList from './CharlList';
-
-
 
 
 const Home = () => {
@@ -44,7 +41,10 @@ const Home = () => {
 var apiURL='https://rickandmortyapi.com/api/character/?page='+currentPage;
 const [isModalVisible, setisModalVisible] = useState(false) //modal popup para mas informacion
 const [modalData, setModalData] = useState()
-
+//For Animation:
+const AVATAR_SIZE = 380;
+const scrollY = React.useRef(new Animated.Value(0)).current;
+const ITEM_SIZE= AVATAR_SIZE + (10);
 
   const changeModalVisibility = (bool,data) => {
     setisModalVisible(bool);
@@ -71,12 +71,23 @@ const [modalData, setModalData] = useState()
   }
   
 
-  const renderItem = ({item}) => {
-
+  const renderItem = ({item,index}) => {
     if(item){ //Si matcheo resultados
-    
+     const inputRange = [
+        -1,
+        0,
+        ITEM_SIZE * index,
+        ITEM_SIZE * (index + 2)
+      ]
+      const scale = scrollY.interpolate({
+        inputRange,
+        outputRange: [1,1,1,0]
+      })
+      
     return(
+    <Animated.View style={{transform:[{scale}]}}>
       <CharList item={item} changeModalVisibility={changeModalVisibility} modalData={modalData} isModalVisible={isModalVisible}></CharList>
+     </Animated.View>
     )
     }
   }
@@ -144,6 +155,7 @@ const [modalData, setModalData] = useState()
     getData(apiURL);
   }
 
+
   return (//Parent contiene todo hasta flatlist, header solo el boton de filtro
     <View style={styles.top}> 
       <View style={styles.header}>
@@ -195,12 +207,17 @@ const [modalData, setModalData] = useState()
       </View>
       <View style={styles.container}>
         <Image source={require('../src/portal.png')} style={StyleSheet.absoluteFill}></Image>    
-        <FlatList
+        <Animated.FlatList
           style={styles.container}
           data={characters}
+         onScroll={Animated.event(
+            [{nativeEvent: {contentOffset: {y: scrollY}}}],
+            {useNativeDriver: true}
+          )}
+          
+          keyExtractor={(item, index) => index.toString()}
           renderItem={renderItem}
           ListFooterComponent={renderFooter}
-          keyExtractor={(item, index) => index.toString()}
           onEndReached={loadMore}
           onEndReachedThreshold={0.2}
         />

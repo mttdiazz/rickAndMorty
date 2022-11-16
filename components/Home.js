@@ -196,9 +196,9 @@ const ITEM_SIZE= AVATAR_SIZE + (10);
             
             <Button onPress={() =>{
               setSearchPageVisible(false);
-              clearModal();
               setCurrentPage(1);
               filterResults();
+              clearModal();
             }}>Go Back </Button>
             </View>
             </View>

@@ -28,7 +28,7 @@ const CharList = ({item,changeModalVisibility,modalData,isModalVisible}) => {
     });
     Animated.timing( flipAnimation, {
       toValue: 360,
-      duration: 1000,
+      duration: 1500,
       useNativeDriver: true,
     } ).start();
     };
@@ -37,10 +37,19 @@ const CharList = ({item,changeModalVisibility,modalData,isModalVisible}) => {
     flipAnimation.addListener( ( { value } ) => flipRotation = value );
     const fliptStyle = {
       transform: [ flag ?
-        { rotateY: flipAnimation.interpolate( {
+        { rotateX: flipAnimation.interpolate( {
           inputRange: [ 0, 360 ],
-          outputRange: [ "0deg", "360deg" ]
-        } ) } : { rotateY: flipAnimation.interpolate( {
+          outputRange: [ "0deg", "360deg" ],
+        } ),
+        rotateY: flipAnimation.interpolate( {
+          inputRange: [ 0, 360 ],
+          outputRange: [ "0deg", "360deg" ],
+        }),
+        rotateZ: flipAnimation.interpolate( {
+          inputRange: [ 0, 180],
+          outputRange: [ "0deg", "360deg" ],
+        })
+       } : { rotateX: flipAnimation.interpolate( {
           inputRange: [ 0, 360 ],
           outputRange: [ "0deg", "360deg" ]
         } ) }

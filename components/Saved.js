@@ -1,5 +1,6 @@
 import React,{useState, useEffect, useRef} from 'react';
-import { View, ActivityIndicator, Image, Text , StyleSheet, FlatList, TouchableOpacity,Animated} from 'react-native';
+import { View, ActivityIndicator, Image, Text , StyleSheet, FlatList, TouchableOpacity,Animated, Modal} from 'react-native';
+import { PopUp } from './PopUp.js';
 import styles from './styles/styles.js';
 import { db } from '../firebaseConfig.js';
 import {update, set, ref, remove, onChildAdded, onChildRemoved } from "firebase/database";
@@ -81,6 +82,11 @@ const Saved = () => {
 
             />
             </View>
+            <Modal transparent = {true} animationType='fade' visible={isModalVisible} nRequestClose={()=> changeModalVisibility(false)}> 
+              <PopUp modalData={modalData}
+                changeModalVisibility={changeModalVisibility}
+              ></PopUp>
+            </Modal>
         </View>
     )
 }

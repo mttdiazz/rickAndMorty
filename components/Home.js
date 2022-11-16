@@ -206,7 +206,7 @@ const ITEM_SIZE= AVATAR_SIZE + (10);
         </Modal>
       </View>
       <View style={styles.container}>
-        <Image source={require('../src/portal.png')} style={StyleSheet.absoluteFill}></Image>    
+        <Image source={require('../src/portal.png') } style={StyleSheet.absoluteFill}></Image>    
         <Animated.FlatList
           style={styles.container}
           data={characters}

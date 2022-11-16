@@ -147,8 +147,8 @@ const styles = StyleSheet.create({
         borderWidth: 2,
         textAlign: 'center',
         backgroundColor: '#97ce4c',
-        marginTop: 10,
-        borderRadius: 20,
+        marginTop: 50,
+        borderRadius: 25,
         paddingHorizontal: 10,
 
     },
@@ -161,6 +161,7 @@ const styles = StyleSheet.create({
         borderWidth: 15,
         borderColor: '#97ce4c',
         marginLeft: 40,
+        top: 160
 
     },
     //Boton.js styles

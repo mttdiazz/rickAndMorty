@@ -1,7 +1,7 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useRef} from 'react';
 import { 
   StyleSheet, View, Text,
-   FlatList, Image, ActivityIndicator, TextInput, TouchableOpacity, Modal
+   FlatList, Image, ActivityIndicator, TextInput, TouchableOpacity, Modal, Animated
 } from 'react-native';
 import Button from './Boton';
 import Dropdown from './Dropdown';
@@ -26,10 +26,30 @@ const CharList = ({item,changeModalVisibility,modalData,isModalVisible}) => {
     .catch((error) => {
       console.error('Error writing document: ', error);
     });
+    Animated.timing( flipAnimation, {
+      toValue: 360,
+      duration: 1000,
+      useNativeDriver: true,
+    } ).start();
+    };
+    const flipAnimation = useRef( new Animated.Value( 0 ) ).current;
+    let flipRotation = 0;
+    flipAnimation.addListener( ( { value } ) => flipRotation = value );
+    const fliptStyle = {
+      transform: [ flag ?
+        { rotateY: flipAnimation.interpolate( {
+          inputRange: [ 0, 360 ],
+          outputRange: [ "0deg", "360deg" ]
+        } ) } : { rotateY: flipAnimation.interpolate( {
+          inputRange: [ 0, 360 ],
+          outputRange: [ "0deg", "360deg" ]
+        } ) }
+      ]
     };
     
     return(
         <View style ={styles.itemRow}>
+          <Animated.View style={{...fliptStyle  }}>
           <TouchableOpacity style={styles.touchableOpacity} onPress={() => changeModalVisibility(true,item)}>
             <Image source={{uri:item.image }} style={styles.itemImage}/>
             </TouchableOpacity>
@@ -43,7 +63,7 @@ const CharList = ({item,changeModalVisibility,modalData,isModalVisible}) => {
               <Image style= {styles.favIcon} source={require('../assets/fullfav.png')}/>
               </TouchableOpacity>
               )}
-      
+          </Animated.View>
   
         
   

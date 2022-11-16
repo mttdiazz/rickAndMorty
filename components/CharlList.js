@@ -7,8 +7,8 @@ import Button from './Boton';
 import Dropdown from './Dropdown';
 import { PopUp } from './PopUp';
 import styles from './styles/styles.js';
-
-
+import {db} from '../firebaseConfig.js';
+import {set, ref, remove} from 'firebase/database';
 
 
 const CharList = ({item,changeModalVisibility,modalData,isModalVisible}) => {
@@ -16,8 +16,18 @@ const CharList = ({item,changeModalVisibility,modalData,isModalVisible}) => {
   const [flag, setFlag] =useState(false);
   const SaveItem = (rowItem) => {
     setFlag(true);
-    console.log('Se ha guardado a: ' + rowItem.name);
+    console.log('Se ha guardado a: ' + rowItem);
+    set(ref(db, 'Characters/'+rowItem.id),{
+      character: rowItem
+    })
+    .then(() => {
+      console.log('Data saved successfully!');
+    })
+    .catch((error) => {
+      console.error('Error writing document: ', error);
+    });
     };
+    
     return(
         <View style ={styles.itemRow}>
           <TouchableOpacity style={styles.touchableOpacity} onPress={() => changeModalVisibility(true,item)}>

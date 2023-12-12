@@ -4,11 +4,14 @@ import Home from './components/Home.js';
 import Saved from './components/Saved.js';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { Provider } from 'react-redux';
+import store from './redux/store.js'
 
 const Tab = createBottomTabNavigator();
 
 export default function App(){
     return(
+    <Provider store = {store}>
     <NavigationContainer >
             <Tab.Navigator     
                 initialRouteName = 'home'
@@ -33,5 +36,6 @@ export default function App(){
                 <Tab.Screen  name = 'Saved Characters' component = {Saved} options = {{ headerShown: false }} />
             </Tab.Navigator>
         </NavigationContainer>
+        </Provider>
     );
 };

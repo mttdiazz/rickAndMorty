@@ -9,11 +9,13 @@ import { PopUp } from './PopUp';
 import styles from './styles/styles.js';
 import {db} from '../firebaseConfig.js';
 import {set, ref, remove} from 'firebase/database';
+import {useDispatch, useSelector} from 'react-redux';
+import { setModalVisible } from '../redux/reducers.js';
 
 
 const CharList = ({item,changeModalVisibility,modalData,isModalVisible}) => {
       //fav icon
-  const [flag, setFlag] =useState(false);
+  const [flag, setFlag] = useState(false);
   const SaveItem = (rowItem) => {
     setFlag(true);
     console.log('Se ha guardado a: ' + rowItem);
@@ -76,7 +78,7 @@ const CharList = ({item,changeModalVisibility,modalData,isModalVisible}) => {
   
         
   
-            <Modal transparent = {true} animationType='fade' visible={isModalVisible} nRequestClose={()=> changeModalVisibility(false)}> 
+            <Modal transparent = {true} animationType='fade' visible={isModalVisible} nRequestClose={()=> {dispatch(setModalVisible)}}> 
               <PopUp modalData={modalData}
                 changeModalVisibility={changeModalVisibility}
               ></PopUp>

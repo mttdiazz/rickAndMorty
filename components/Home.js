@@ -7,6 +7,8 @@ import Button from './Boton';
 import Dropdown from './Dropdown';
 import styles from './styles/styles.js';
 import CharList from './CharlList';
+import { setSelectedGender } from '../redux/reducers.js';
+import { useDispatch, useSelector } from 'react-redux';
 
 
 const Home = () => {
@@ -22,7 +24,8 @@ const Home = () => {
   const [selectedStatus, setSelectedStatus] = useState({id:0, name:""});
   const [selectedGender, setSelectedGender] = useState({id:0, name:""});
   const [searchPageVisible, setSearchPageVisible]= useState(false);
-  
+
+
   const status=[ //Different Status for the characters
     {id:0, name:""},
     {id:1, name:"Alive"},
@@ -129,8 +132,9 @@ const ITEM_SIZE= AVATAR_SIZE + (10);
     setSelectedStatus(item);
 
   }
-  const selectGender = (item) => {
-    setSelectedGender(item);
+  
+  const selectGenderHandler = (item) => {
+    dispatch(setGender(item));
   }
 
   const filter=()=>{
@@ -185,7 +189,7 @@ const ITEM_SIZE= AVATAR_SIZE + (10);
                 value={selectedGender}
                 items={gender}
                 name={'Gender'}
-                onSelect={selectGender}
+                onSelect={selectGenderHandler}
                 />
 
               </View>

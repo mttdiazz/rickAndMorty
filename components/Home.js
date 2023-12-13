@@ -7,24 +7,14 @@ import Button from './Boton';
 import Dropdown from './Dropdown';
 import styles from './styles/styles.js';
 import CharList from './CharlList';
-import { setSelectedGender } from '../redux/reducers.js';
+import { setIsLoading, setIsModalVisible, setCharacters, setCurrentPage, setTotalPage, setSearchName, setSearchType, setSearchSpecies,setSelectedStatus, setSelectedGender,setSearchPageVisible } from '../redux/reducers.js';
 import { useDispatch, useSelector } from 'react-redux';
 
 
 const Home = () => {
-
-  const [characters, setCharacters] = useState([])
-  const [isLoading, setisLoading] = useState (false)
-  const [currentPage, setCurrentPage] = useState(1)
-  const [totalPage, setTotalPage] = useState(0)
-  //Filtro
-  const [searchName, setSearchName] = useState('');
-  const [searchType, setSearchType] = useState('');
-  const [searchSpecies, setSearchSpecies] = useState('');
-  const [selectedStatus, setSelectedStatus] = useState({id:0, name:""});
-  const [selectedGender, setSelectedGender] = useState({id:0, name:""});
-  const [searchPageVisible, setSearchPageVisible]= useState(false);
-
+  //redux states
+  const {isModalVisible, isLoading, characters, currentPage, totalPage, searchName, searchType, searchSpecies, selectedStatus, selectedGender, searchPageVisible}  = useSelector(state => state.application);
+  const dispatch = useDispatch();
 
   const status=[ //Different Status for the characters
     {id:0, name:""},
@@ -42,7 +32,6 @@ const Home = () => {
   ];
 
 var apiURL='https://rickandmortyapi.com/api/character/?page='+currentPage;
-const [isModalVisible, setisModalVisible] = useState(false) //modal popup para mas informacion
 const [modalData, setModalData] = useState()
 //For Animation:
 const AVATAR_SIZE = 380;
@@ -50,13 +39,13 @@ const scrollY = React.useRef(new Animated.Value(0)).current;
 const ITEM_SIZE= AVATAR_SIZE + (10);
 
   const changeModalVisibility = (bool,data) => {
-    setisModalVisible(bool);
+    {dispatch(setIsModalVisible(bool))};
     setModalData(data);
   }
 
   useEffect(() => {
     getData(apiURL)
-    setisLoading(true)
+    {dispatch(setIsLoading(true))}
     return () => {
 
     }
@@ -66,10 +55,10 @@ const ITEM_SIZE= AVATAR_SIZE + (10);
     fetch(URL)
       .then((res) => res.json())
       .then((resJson) => {
-        setCharacters(characters.concat(resJson.results));
+        {dispatch(setCharacters(characters.concat(resJson.results)))};
         //setMasterData(characters.concat(resJson.results));
-        setTotalPage(resJson.info.pages);
-        setisLoading(false);
+        {dispatch(setTotalPage(resJson.info.pages))};
+        {dispatch(setIsLoading(false))};
       })
   }
   
@@ -106,40 +95,40 @@ const ITEM_SIZE= AVATAR_SIZE + (10);
 
   loadMore = () => {
     if(currentPage < totalPage){
-    setCurrentPage(currentPage + 1)
-    setisLoading(true)
+    {dispatch(setCurrentPage(currentPage + 1))}
+    {dispatch(setIsLoading(true))}
     console.log(currentPage)
     }
   } 
   //Filtro button
   const filterButtonAction=()=>{
-    setCharacters([]);
-    setSearchPageVisible(true);
+    {dispatch(setCharacters([]))};
+    {dispatch(setSearchPageVisible(true))};
     clearModal;
-    setCharacters([]);
+    {dispatch(setCharacters([]))};
   }
   const clearModal=()=>{
-    setSearchName("");
-    setSearchSpecies('');
-    setSearchType('');
-    setSelectedGender({id:0, name:""});
-    setSelectedStatus({id:0, name:""});
+    {dispatch(setSearchName(""))};
+    {dispatch(setSearchSpecies(''))};
+    {dispatch(setSearchType(''))};
+    {dispatch(setSelectedGender({id:0, name:""}))};
+    {dispatch(setSelectedStatus({id:0, name:""}))};
     getData('https://rickandmortyapi.com/api/character/?page='+currentPage);
   }
   
   const selectStatus = (item) => {
     console.log(item.name);
-    setSelectedStatus(item);
+    {dispatch(setSelectedStatus(item))};
 
   }
   
   const selectGenderHandler = (item) => {
-    dispatch(setGender(item));
+    {dispatch(setSelectedGender(item))};
   }
 
   const filter=()=>{
     console.log("pasa");
-    setCurrentPage(1);
+    {dispatch(setCurrentPage(1))};
     filterResults();
   }
   const clear=()=>{
@@ -147,12 +136,7 @@ const ITEM_SIZE= AVATAR_SIZE + (10);
     getData(URL);
   }
   const filterResults=()=>{
-    setSearchPageVisible(false);
-    console.log(searchName);
-    console.log(searchSpecies);
-    console.log(searchType);
-    console.log(selectedStatus.name);
-    console.log(selectedGender.name);
+    {dispatch(setSearchPageVisible(false))};
     apiURL='https://rickandmortyapi.com/api/character/?page='+
     currentPage+'&name='+searchName+'&species='+searchSpecies+'&type='+
     searchType+'&status='+selectedStatus.name+'&gender='+selectedGender.name;
@@ -172,9 +156,9 @@ const ITEM_SIZE= AVATAR_SIZE + (10);
           <View style={{flex: 1, backgroundColor: 'black', marginTop:50}}>
             <View style={styles.form}>
               <View style={styles.form}>
-                <TextInput style={styles.TextInputStyle} placeholder="Name" onChangeText={(newName)=> {setSearchName(newName);}}/>
-                <TextInput style={styles.TextInputStyle} placeholder="Species" onChangeText={(newName)=> {setSearchSpecies(newName);}}/>
-                <TextInput style={styles.TextInputStyle} placeholder="Type" onChangeText={(newName)=> {setSearchName(newName);}}/>
+                <TextInput style={styles.TextInputStyle} placeholder="Name" onChangeText={(newName)=> {{dispatch(setSearchSpecies(newName))};}}/>
+                <TextInput style={styles.TextInputStyle} placeholder="Species" onChangeText={(newName)=> {{dispatch(setSearchSpecies(newName))};}}/>
+                <TextInput style={styles.TextInputStyle} placeholder="Type" onChangeText={(newName)=> {{dispatch(setSearchName(newName))};}}/>
               </View>
               <View style={styles.form}>
                 <Text syle={{color:'black', fontSize:50}}>Status</Text>
@@ -200,7 +184,7 @@ const ITEM_SIZE= AVATAR_SIZE + (10);
             
             <Button onPress={() =>{
               setSearchPageVisible(false);
-              setCurrentPage(1);
+              {dispatch(setCurrentPage(1))};
               filterResults();
               clearModal();
             }}>Go Back </Button>

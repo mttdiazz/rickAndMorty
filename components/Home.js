@@ -7,13 +7,13 @@ import Button from './Boton';
 import Dropdown from './Dropdown';
 import styles from './styles/styles.js';
 import CharList from './CharlList';
-import { setIsLoading, setIsModalVisible, setCharacters, setCurrentPage, setTotalPage, setSearchName, setSearchType, setSearchSpecies,setSelectedStatus, setSelectedGender,setSearchPageVisible } from '../redux/reducers.js';
+import { setIsLoading, setIsModalVisible, setCharacters, setCurrentPage, setTotalPage, setSearchName, setSearchType, setSearchSpecies,setSelectedStatus, setSelectedGender,setSearchPageVisible, setModalData } from '../redux/reducers.js';
 import { useDispatch, useSelector } from 'react-redux';
 
 
 const Home = () => {
   //redux states
-  const {isModalVisible, isLoading, characters, currentPage, totalPage, searchName, searchType, searchSpecies, selectedStatus, selectedGender, searchPageVisible}  = useSelector(state => state.application);
+  const {isModalVisible, isLoading, characters, currentPage, totalPage, searchName, searchType, searchSpecies, selectedStatus, selectedGender, searchPageVisible, modalData}  = useSelector(state => state.application);
   const dispatch = useDispatch();
 
   const status=[ //Different Status for the characters
@@ -32,7 +32,6 @@ const Home = () => {
   ];
 
 var apiURL='https://rickandmortyapi.com/api/character/?page='+currentPage;
-const [modalData, setModalData] = useState()
 //For Animation:
 const AVATAR_SIZE = 380;
 const scrollY = React.useRef(new Animated.Value(0)).current;
@@ -40,7 +39,7 @@ const ITEM_SIZE= AVATAR_SIZE + (10);
 
   const changeModalVisibility = (bool,data) => {
     {dispatch(setIsModalVisible(bool))};
-    setModalData(data);
+    {dispatch(setModalData(data))};
   }
 
   useEffect(() => {
@@ -147,9 +146,8 @@ const ITEM_SIZE= AVATAR_SIZE + (10);
   return (//Parent contiene todo hasta flatlist, header solo el boton de filtro
     <View style={styles.top}> 
       <View style={styles.header}>
-        <Text style={styles.title}> Welcome to Rick&Morty's API</Text>
-        <Text style={styles.subtitle}> By Pedro Ortiz de Guinea & Mateo Macagni Diaz</Text>
-        <Button onPress={filterButtonAction}>Filters</Button>
+      <Text style={styles.subtitle}> By Pedro Ortiz de Guinea & Mateo Macagni Diaz</Text>
+        <Button style= {styles.filterButton} onPress={filterButtonAction}>Filters</Button>
       </View>
       <View style={styles.filtro}>
         <Modal visible={searchPageVisible} style={{backgroundColor:'black'}}>

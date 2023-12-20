@@ -7,8 +7,13 @@ const styles = StyleSheet.create({
     container: {
       marginTop: 10,
     },
-    searchBar:{
-    },
+    logo:{
+      width: 400,
+      height: 100,
+      resizeMode: 'contain',
+      alignSelf: 'center',
+      marginTop: 10,
+    } ,
     itemRow: {
       height: 380 ,
       width: 325,
@@ -74,14 +79,13 @@ const styles = StyleSheet.create({
       color:'#97ce4c',
       marginTop:10,
       marginBottom:10,
-      fontsize: 20,
+      fontsize: 10,
     },
     filtro:{
       backgroundColor: 'black',
       
     },
     form:{
-      positiono: 'center',
       backgroundColor:'#97ce4c',
       flexDirection:'column',
       align:'stretch',
@@ -89,13 +93,15 @@ const styles = StyleSheet.create({
     },
     filterButtons:{
       flexDirection:'row',
-      marginTop:15,
+      marginTop:10,
       marginLeft:15,
     },
     //Dropdon Styles
     dropdownStyle:{
-        backgroundColor: '#e4a788',
-        padding: 8,
+        backgroundColor: '#97ce4c',
+        borderColor: 'black',
+        borderWidth: 2,
+        padding: 0,
         borderRadius: 5,
         minHeight: 42,
         justifyContent: 'center',
@@ -171,10 +177,21 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         borderWidth: 1,
         borderColor: 'black',
-        paddingHorizontal: 30,
-        paddingVertical: 10,
+        paddingHorizontal: 28,
+        paddingVertical: 1,
         marginHorizontal: 5,
-        marginVertical: 5,
+        marginVertical: 15,
+    },
+    filterButton:{
+        alignSelf: 'center',
+        backgroundColor: '#97ce4c',
+        borderRadius: 5,
+        borderWidth: 1,
+        borderColor: 'black',
+        paddingHorizontal: 140,
+        paddingVertical: 5,
+        marginHorizontal: 5,
+        marginVertical: 10,
     },
     textStyle:{
         alignSelf: 'center',

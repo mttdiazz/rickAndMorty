@@ -5,15 +5,14 @@ import styles from './styles/styles.js';
 import { db } from '../firebaseConfig.js';
 import {update, set, ref, remove, onChildAdded, onChildRemoved } from "firebase/database";
 import Button from './Boton.js';
-import { setIsLoading, setisModalVisible } from '../redux/reducers.js';
+import { setIsLoading, setisModalVisible, setModalData} from '../redux/reducers.js';
 import { useDispatch, useSelector } from 'react-redux';
 
 
 const Saved = () => {
     const dispatch = useDispatch();
-    const {isModalVisible, isLoading}  = useSelector(state => state.application);
-    
-    const [modalData, setModalData] = useState()
+    const {isModalVisible, isLoading, modalData}  = useSelector(state => state.application);
+
     const [data, setData] = useState([]); //Data from the database
     //For Animation:
     const AVATAR_SIZE = 380;
@@ -21,8 +20,8 @@ const Saved = () => {
     const ITEM_SIZE= AVATAR_SIZE + (10);
 
     const changeModalVisibility = (bool,data) => {
-        {dispatch(setisModalVisible(bool))};
-        setModalData(data);
+        {dispatch(setIsModalVisible(bool))};
+        {dispatch(setModalData(data))};
       }
       useEffect(() => {
         {dispatch(setIsLoading(true))}

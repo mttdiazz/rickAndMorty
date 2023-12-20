@@ -56,10 +56,16 @@ const reducers = createSlice({
     },
     setSearchPageVisible: (state, action) => {
       state.searchPageVisible = action.payload;
-    }
+    },
+    setShowOptions: (state, action) => {
+      state.showOptions = action.payload;
+    },
+    setModalData: (state, action) => {
+      state.modalData = action.payload;
+    },
   }
 });
 
 
-export const { setIsModalVisible , setIsLoading , setCharacters,setCurrentPage, setTotalPage, setSearchName,setSearchType, setSearchSpecies, setSelectedStatus, setSelectedGender , setSearchPageVisible} = reducers.actions;
+export const { setIsModalVisible , setIsLoading , setCharacters,setCurrentPage, setTotalPage, setSearchName,setSearchType, setSearchSpecies, setSelectedStatus, setSelectedGender , setSearchPageVisible, setShowOptions, setModalData} = reducers.actions;
 export default reducers.reducer;

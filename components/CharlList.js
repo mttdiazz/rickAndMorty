@@ -8,6 +8,7 @@ import Dropdown from './Dropdown';
 import { PopUp } from './PopUp';
 import styles from './styles/styles.js';
 import {db} from '../firebaseConfig.js';
+import { get, child } from 'firebase/database';
 import {set, ref, remove} from 'firebase/database';
 import {useDispatch, useSelector} from 'react-redux';
 import { setModalVisible } from '../redux/reducers.js';
@@ -16,6 +17,20 @@ import { setModalVisible } from '../redux/reducers.js';
 const CharList = ({item,changeModalVisibility,modalData,isModalVisible}) => {
       //fav icon
   const [flag, setFlag] = useState(false);
+
+  useEffect(() => {
+    const checkFavoriteStatus = async () => {
+      try {
+        const snapshot = await get(child(ref(db), `Characters/${item.id}`));
+        setFlag(snapshot.exists());
+      } catch (error) {
+        console.error('Error checking favorite status: ', error);
+      }
+    };
+
+    checkFavoriteStatus();
+  }, [item.id]);
+
   const SaveItem = (rowItem) => {
     setFlag(true);
     console.log('Se ha guardado a: ' + rowItem);
@@ -38,24 +53,19 @@ const CharList = ({item,changeModalVisibility,modalData,isModalVisible}) => {
     let flipRotation = 0;
     flipAnimation.addListener( ( { value } ) => flipRotation = value );
     const fliptStyle = {
-      transform: [ flag ?
-        { rotateX: flipAnimation.interpolate( {
-          inputRange: [ 0, 360 ],
-          outputRange: [ "0deg", "360deg" ],
-        } ),
-        rotateY: flipAnimation.interpolate( {
-          inputRange: [ 0, 360 ],
-          outputRange: [ "0deg", "360deg" ],
-        }),
-        rotateZ: flipAnimation.interpolate( {
-          inputRange: [ 0, 180],
-          outputRange: [ "0deg", "360deg" ],
-        })
-       } : { rotateX: flipAnimation.interpolate( {
-          inputRange: [ 0, 360 ],
-          outputRange: [ "0deg", "360deg" ]
-        } ) }
-      ]
+      transform: [
+        {
+          rotateX: flag
+            ? flipAnimation.interpolate({
+                inputRange: [0, 360],
+                outputRange: ['0deg', '360deg'],
+              })
+            : flipAnimation.interpolate({
+                inputRange: [0, 360],
+                outputRange: ['0deg', '360deg'],
+              }),
+        },
+      ],
     };
     
     return(

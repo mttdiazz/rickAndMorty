@@ -19,7 +19,7 @@ This project was developed as a learning experience for mobile app development u
 
 ## Installation and Usage
 
-1. Clone the repository: `git clone https://github.com/your-username/rick-and-morty-app.git`
+1. Clone the repository: `git clone https://github.com/mttdiazz/rick-and-morty-app.git`
 2. Install dependencies: Navigate to the project directory and run `npm install` to install the required dependencies.
 3. Configure Firebase:
    - Create a Firebase project at [https://console.firebase.google.com/](https://console.firebase.google.com/).
